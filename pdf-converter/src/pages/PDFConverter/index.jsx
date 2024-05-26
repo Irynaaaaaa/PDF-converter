@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import PDFViewer from '../PDFViewer';
-import ConvertedHistory from './ConvertedHistory';
-import { base64ToBlob } from './utils';
-import ConverterDataInput from './ConverterDataInput';
+import { base64ToBlob } from '../../components/PDFConverter/utils';
+import ConverterDataInput from '../../components/PDFConverter/ConverterDataInput';
+import ConvertedHistory from '../../components/PDFConverter/ConvertedHistory';
+import PDFViewer from '../../components/PDFViewer';
 
 const PDFConverter = () => {
   const [pdfUrls, setPdfUrls] = useState([]);
@@ -19,7 +19,7 @@ const PDFConverter = () => {
   }, []);
 
   return (
-    <div className="flex flex-row gap-5 overflow-hidden h-full">
+    <div className="flex flex-row gap-4 overflow-hidden h-full">
       <div className="flex-1">
         <ConverterDataInput
           pdfUrls={pdfUrls}

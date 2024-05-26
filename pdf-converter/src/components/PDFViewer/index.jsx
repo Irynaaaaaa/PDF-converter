@@ -8,13 +8,13 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 export default function PDFViewer({ url }) {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
-  if (!url) return <DefaultPreview text="No files selected" />;
-
-  return (
+  return url ? (
     <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
       <div className="h-full">
         <Viewer fileUrl={url} plugins={[defaultLayoutPluginInstance]} />
       </div>
     </Worker>
+  ) : (
+    <DefaultPreview text="No files selected" />
   );
 }

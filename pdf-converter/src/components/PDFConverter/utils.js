@@ -19,3 +19,9 @@ export const base64ToBlob = (base64) => {
   const byteArray = new Uint8Array(byteNumbers);
   return new Blob([byteArray]);
 };
+
+export const getNextActiveUrl = (pdfUrls, i) => {
+  if (pdfUrls[i + 1]) return pdfUrls[i + 1].url;
+  if (pdfUrls[i - 1]) return pdfUrls[i - 1].url;
+  return '';
+};

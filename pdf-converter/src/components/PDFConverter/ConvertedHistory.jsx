@@ -1,17 +1,15 @@
 import React from 'react';
 import ConvertedFile from './ConvertedFile';
+import { getNextActiveUrl } from './utils';
 
 const ConvertedHistory = ({ pdfUrls, activeUrl, setPdfUrls, setActiveUrl }) => {
   const onDelete = (e, fileName, i) => {
     e.stopPropagation();
     const updatedPdfUrls = pdfUrls.filter(({ name }) => name !== fileName);
 
-    if (pdfUrls[i + 1]) {
-      setActiveUrl(pdfUrls[i + 1].url);
-    } else if (pdfUrls[i - 1]) {
-      setActiveUrl(pdfUrls[i - 1].url);
-    } else {
-      setActiveUrl('');
+    if (pdfUrls[i].url === activeUrl) {
+      const nextActiveUrl = getNextActiveUrl(pdfUrls, i);
+      setActiveUrl(nextActiveUrl.url);
     }
 
     setPdfUrls(updatedPdfUrls);
@@ -23,11 +21,11 @@ const ConvertedHistory = ({ pdfUrls, activeUrl, setPdfUrls, setActiveUrl }) => {
   };
 
   return (
-    <div className="mt-10 h-full flex flex-col gap-3">
+    <div className="mt-3 h-full flex flex-col gap-3">
       <span className="text-xl">
         {pdfUrls.length ? 'Converted files' : 'No converted files yet'}
       </span>
-      <ul className="flex flex-col gap-3 h-full max-h-290px overflow-auto scrollbar-thin">
+      <ul className="flex flex-col gap-1 h-full max-h-[315px] overflow-auto scrollbar-thin">
         {pdfUrls.map(({ name, url }, i) => (
           <ConvertedFile
             fileName={name}
