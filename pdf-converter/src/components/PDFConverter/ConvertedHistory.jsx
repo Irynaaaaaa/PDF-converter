@@ -9,7 +9,7 @@ const ConvertedHistory = ({ pdfUrls, activeUrl, setPdfUrls, setActiveUrl }) => {
 
     if (pdfUrls[i].url === activeUrl) {
       const nextActiveUrl = getNextActiveUrl(pdfUrls, i);
-      setActiveUrl(nextActiveUrl.url);
+      setActiveUrl(nextActiveUrl);
     }
 
     setPdfUrls(updatedPdfUrls);

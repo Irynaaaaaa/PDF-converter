@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { convertTextToPdf } from '../../../api/pdf-convert';
 import ConverterDataInput from '../ConverterDataInput';
+import ConvertedFile from '../ConvertedFile';
+import { convertTextToPdf } from '../../../api/pdf-convert';
 import { blobToBase64 } from '../utils';
 
 jest.mock('../../../api/pdf-convert', () => ({
@@ -52,5 +53,9 @@ describe('ConverterDataInput', () => {
       expect(convertTextToPdf).toHaveBeenCalledWith('Some text');
       expect(blobToBase64).toHaveBeenCalledWith(mockBlob);
     });
+
+    render(<ConvertedFile />);
+    const listItemElements = screen.getAllByRole('listitem');
+    expect(listItemElements).toHaveLength(1);
   });
 });
